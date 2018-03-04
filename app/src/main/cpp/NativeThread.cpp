@@ -2,6 +2,7 @@
 #include "Logger.h"
 
 #include <thread>
+#include <unistd.h>
 
 static JavaVM* s_jvm = 0;
 
@@ -16,7 +17,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
     }
 
     //Save pointer to JVM
-    // s_jvm = vm;
+    s_jvm = vm;
 
     return JNI_VERSION_1_6;
 }
@@ -31,13 +32,28 @@ static void asyncRequest(JNIEnv *env)
     env->CallStaticVoidMethod(clazz, nativeCallback);
 }
 
+static JNIEnv* attach()
+{
+    JNIEnv* threadEnv = nullptr;
+    jint getEnvSuccess = s_jvm->GetEnv((void**)&threadEnv, JNI_VERSION_1_6);
+    if (getEnvSuccess == JNI_EDETACHED)
+    {
+        DEMO_LOG("getEnvSuccess=%d", (int)getEnvSuccess);
+        jint ret = s_jvm->AttachCurrentThread(&threadEnv, NULL);
+        if (ret != 0)
+        {
+            // Attach failed for some reason, don't set flag otherwise detach occurs and crashes.
+            DEMO_LOG("attach failed! tid=%d", gettid());
+        }
+    }
+    return threadEnv;
+}
+
 static void asyncRequestCorrect(JNIEnv *env)
 {
     DEMO_LOG("asyncRequestCorrect env = %p", (void *)env);
 
-    JNIEnv* threadEnv = nullptr;
-    s_jvm->AttachCurrentThread(&threadEnv, nullptr);
-
+    JNIEnv* threadEnv = attach();
     asyncRequest(threadEnv);
 
     s_jvm->DetachCurrentThread();
@@ -56,9 +72,6 @@ void nativeThreadNegative(JNIEnv *env)
 void nativeThreadPositive(JNIEnv *env)
 {
     DEMO_LOG("nativeThreadPositive IN\n");
-
-    // Get pointer to the JVM
-    env->GetJavaVM(&s_jvm);
 
     std::thread nativeThread(asyncRequestCorrect, env);
     nativeThread.join();
