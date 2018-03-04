@@ -19,8 +19,9 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             src/main/cpp/native-lib.cpp
+             src/main/cpp/JNIBridge.cpp
              src/main/cpp/ReferenceTable.cpp
+             src/main/cpp/NativeThread.cpp
              src/main/cpp/Class1.cpp
              src/main/cpp/Class2.cpp)
 
@@ -30,6 +31,8 @@ add_library( # Sets the name of the library.
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
+
+#IMPORTANT C++ compiler flags
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden")
 
 find_library( log-lib log )

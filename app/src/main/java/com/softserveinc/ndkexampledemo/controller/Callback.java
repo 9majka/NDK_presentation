@@ -1,4 +1,4 @@
-package com.softserveinc.ndkexampledemo;
+package com.softserveinc.ndkexampledemo.controller;
 
 public interface Callback {
 

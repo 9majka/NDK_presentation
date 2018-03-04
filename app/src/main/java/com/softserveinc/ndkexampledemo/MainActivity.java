@@ -2,8 +2,11 @@ package com.softserveinc.ndkexampledemo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
+
+import com.softserveinc.ndkexampledemo.controller.Callback;
+import com.softserveinc.ndkexampledemo.controller.CaseItem;
+import com.softserveinc.ndkexampledemo.controller.CaseItemAdapter;
 
 import java.util.ArrayList;
 
@@ -29,45 +32,57 @@ public class MainActivity extends Activity {
     }
 
     void init() {
-        mCaseArray.add(getLocalTableReference());
-        mCaseArray.add(getGlobalTableReference());
+        mCaseArray.add(getLocalTableReferenceCase());
+        mCaseArray.add(getGlobalTableReferenceCase());
+        mCaseArray.add(getNativeThreadCase());
+
     }
 
-    CaseItem getLocalTableReference() {
+    CaseItem getLocalTableReferenceCase() {
         return new CaseItem("1. Local table reference overflow",
                 new Callback() {
                     @Override
                     public void execute() {
-                        localTableReferenceOverflowNegative();
+                        JNIBridge.localTableReferenceOverflowNegative();
                     }
                 },
                 new Callback() {
                     @Override
                     public void execute() {
-                        localTableReferenceOverflowPositive();
+                        JNIBridge.localTableReferenceOverflowPositive();
                     }
                 });
     }
 
-    CaseItem getGlobalTableReference() {
+    CaseItem getGlobalTableReferenceCase() {
         return new CaseItem("2. Global table reference overflow",
                 new Callback() {
                     @Override
                     public void execute() {
-                        globalTableReferenceOverflowNegative();
+                        JNIBridge.globalTableReferenceOverflowNegative();
                     }
                 },
                 new Callback() {
                     @Override
                     public void execute() {
-                        globalTableReferenceOverflowPositive();
+                        JNIBridge.globalTableReferenceOverflowPositive();
                     }
                 });
     }
 
-    private native void localTableReferenceOverflowPositive();
-    private native void localTableReferenceOverflowNegative();
-
-    private native void globalTableReferenceOverflowPositive();
-    private native void globalTableReferenceOverflowNegative();
+    CaseItem getNativeThreadCase() {
+        return new CaseItem("3. NDK native threads",
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.nativeThreadNegative();
+                    }
+                },
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.nativeThreadPositive();
+                    }
+                });
+    }
 }

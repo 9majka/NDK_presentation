@@ -1,4 +1,4 @@
-package com.softserveinc.ndkexampledemo;
+package com.softserveinc.ndkexampledemo.controller;
 
 public class CaseItem {
     private String mLabel;
