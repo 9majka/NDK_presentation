@@ -6,6 +6,8 @@
 
 static JavaVM* s_jvm = 0;
 
+jobject g_class = nullptr;
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved)
 {
     DEMO_LOG("JNI_OnLoad IN\n");
@@ -26,7 +28,8 @@ static void asyncRequest(JNIEnv *env)
 {
     DEMO_LOG("asyncRequest env = %p", (void *)env);
 
-    jclass clazz = env->FindClass("com/softserveinc/ndkexampledemo/JNIBridge");
+    jclass clazz = static_cast<jclass >(g_class);
+
     // Get the method that you want to call
     jmethodID nativeCallback = env->GetStaticMethodID(clazz, "nativeCallback", "()V");
     env->CallStaticVoidMethod(clazz, nativeCallback);
@@ -59,9 +62,12 @@ static void asyncRequestCorrect(JNIEnv *env)
     s_jvm->DetachCurrentThread();
 }
 
-void nativeThreadNegative(JNIEnv *env)
+void nativeThreadNegative(JNIEnv *env, jclass thiz)
 {
     DEMO_LOG("nativeThreadNegative IN\n");
+
+    g_class = env->NewGlobalRef(thiz);
+
 
     std::thread nativeThread(asyncRequest, env);
     nativeThread.join();
@@ -69,9 +75,11 @@ void nativeThreadNegative(JNIEnv *env)
     DEMO_LOG("nativeThreadNegative OUT\n");
 }
 
-void nativeThreadPositive(JNIEnv *env)
+void nativeThreadPositive(JNIEnv *env, jclass thiz)
 {
     DEMO_LOG("nativeThreadPositive IN\n");
+
+    g_class = env->NewGlobalRef(thiz);
 
     std::thread nativeThread(asyncRequestCorrect, env);
     nativeThread.join();

@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
                 new Callback() {
                     @Override
                     public void execute() {
-                        JNIBridge.nativeThreadPositive();
+                        JNIBridge.nativeThreadPositive1();
                     }
                 });
     }
