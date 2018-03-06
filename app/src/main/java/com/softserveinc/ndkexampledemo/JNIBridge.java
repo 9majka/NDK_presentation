@@ -23,5 +23,5 @@ public class JNIBridge {
     public static native void globalTableReferenceOverflowNegative();
 
     public static native void nativeThreadNegative();
-    public static native void nativeThreadPositive1();
+    public static native void nativeThreadPositive();
 }

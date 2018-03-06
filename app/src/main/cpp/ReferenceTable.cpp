@@ -62,7 +62,7 @@ void globalTableReferenceOverflowNegative(JNIEnv *env)
 
 void globalTableReferenceOverflowPositive(JNIEnv *env)
 {
-    DEMO_LOG("globalTableReferenceOverflowPositive IN\n");
+    DEMO_LOG("globalTableReferenceOverflowPositive IN1\n");
 
     Class1 test;
     test.testMethod();
