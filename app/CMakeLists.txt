@@ -33,9 +33,7 @@ add_library( # Sets the name of the library.
 
 
 #IMPORTANT C++ compiler flags
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti")
-
-#-fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden")
 
 find_library( log-lib log )
 

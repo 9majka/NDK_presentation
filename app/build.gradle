@@ -10,7 +10,7 @@ android {
         versionName "1.0"
         externalNativeBuild {
             cmake {
-               //cppFlags "-std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden"
+               //cppFlags "-std=c++11 -fexceptions"
             }
         }
     }
