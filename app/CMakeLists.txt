@@ -22,6 +22,7 @@ add_library( # Sets the name of the library.
              src/main/cpp/JNIBridge.cpp
              src/main/cpp/ReferenceTable.cpp
              src/main/cpp/NativeThread.cpp
+             src/main/cpp/Exception.cpp
              src/main/cpp/Class1.cpp
              src/main/cpp/Class2.cpp)
 
@@ -33,7 +34,7 @@ add_library( # Sets the name of the library.
 
 
 #IMPORTANT C++ compiler flags
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden")
 
 find_library( log-lib log )
 

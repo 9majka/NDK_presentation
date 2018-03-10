@@ -12,7 +12,21 @@ public class JNIBridge {
     public static void nativeCallbackWithException() throws Exception
     {
         Log.i("JNIBridge", "nativeCallbackWithException: IN");
-        throw new Exception("Some Exception");
+
+        // NPE
+        Object someObj = null;
+        Log.i("JNIBridge", "nativeCallbackWithException: " + someObj.toString());
+    }
+
+    public static void exceptionFromJNI() {
+        try {
+            throwException();
+        } catch (IllegalArgumentException ex) {
+            Log.i("JNIBridge", "Java: IllegalArgumentException is caught: " + ex);
+        } catch (Exception ex) {
+            Log.i("JNIBridge", "Java: Exception is caught: " + ex);
+        }
+
     }
 
 
@@ -24,4 +38,9 @@ public class JNIBridge {
 
     public static native void nativeThreadNegative();
     public static native void nativeThreadPositive();
+
+    public static native void pendingException();
+    public static native void pendingExceptionPositive();
+    public static native void throwException();
+    public static native void crashSignal();
 }

@@ -35,6 +35,9 @@ public class MainActivity extends Activity {
         mCaseArray.add(getLocalTableReferenceCase());
         mCaseArray.add(getGlobalTableReferenceCase());
         mCaseArray.add(getNativeThreadCase());
+        mCaseArray.add(getPendingExceptionCase());
+        mCaseArray.add(getThrowExceptionCase());
+        mCaseArray.add(getSignalHandlerCase());
 
     }
 
@@ -82,6 +85,54 @@ public class MainActivity extends Activity {
                     @Override
                     public void execute() {
                         JNIBridge.nativeThreadPositive();
+                    }
+                });
+    }
+
+    CaseItem getPendingExceptionCase() {
+        return new CaseItem("4. Pending exception",
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.pendingException();
+                    }
+                },
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.pendingExceptionPositive();
+                    }
+                });
+    }
+
+    CaseItem getThrowExceptionCase() {
+        return new CaseItem("5. Throw exception from JNI",
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.exceptionFromJNI();
+                    }
+                },
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.exceptionFromJNI();
+                    }
+                });
+    }
+
+    CaseItem getSignalHandlerCase() {
+        return new CaseItem("6. Signal handler",
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.crashSignal();
+                    }
+                },
+                new Callback() {
+                    @Override
+                    public void execute() {
+                        JNIBridge.crashSignal();
                     }
                 });
     }

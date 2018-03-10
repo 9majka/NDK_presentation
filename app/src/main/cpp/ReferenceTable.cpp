@@ -13,11 +13,9 @@ void localTableReferenceOverflowNegative(JNIEnv *env)
     for(int i = 0; i< 600; i++)
     {
         jstring testString = env->NewStringUTF("Test String");
-        jbooleanArray arrayB = env->NewBooleanArray(5);
-        jcharArray arrayC = env->NewCharArray(4);
-
-
-        // Call some method on the Java side
+        jbooleanArray arrayB = env->NewBooleanArray(42);
+        jcharArray arrayC = env->NewCharArray(42);
+        // do something
     }
 
     DEMO_LOG("localTableReferenceOverflowNegative DONE\n");
@@ -51,8 +49,6 @@ void globalTableReferenceOverflowNegative(JNIEnv *env)
     {
         jstring testString = env->NewStringUTF("Test String");
         jobject globalObject = env->NewGlobalRef(testString);
-
-
         globalArray.push_back(globalObject);
         env->DeleteLocalRef(testString);
     }
@@ -62,7 +58,7 @@ void globalTableReferenceOverflowNegative(JNIEnv *env)
 
 void globalTableReferenceOverflowPositive(JNIEnv *env)
 {
-    DEMO_LOG("globalTableReferenceOverflowPositive IN1\n");
+    DEMO_LOG("globalTableReferenceOverflowPositive IN\n");
 
     Class1 test;
     test.testMethod();

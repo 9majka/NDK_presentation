@@ -3,7 +3,10 @@
 
 #include <jni.h>
 
-void methodWithException(JNIEnv *env);
+void pendingException(JNIEnv *env, jclass thiz);
+void pendingExceptionPositive(JNIEnv *env, jclass thiz);
+void throwException(JNIEnv *env, jclass thiz);
+void crashHandler(JNIEnv *env, jclass thiz);
 
 
 #endif //PRESENTATION_EXCEPTION_H
