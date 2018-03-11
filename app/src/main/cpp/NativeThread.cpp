@@ -24,17 +24,6 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
     return JNI_VERSION_1_6;
 }
 
-static void asyncRequest(JNIEnv *env)
-{
-    DEMO_LOG("asyncRequest env = %p", (void *)env);
-
-    jclass clazz = static_cast<jclass >(g_class);
-
-    // Get the method that you want to call
-    jmethodID nativeCallback = env->GetStaticMethodID(clazz, "nativeCallback", "()V");
-    env->CallStaticVoidMethod(clazz, nativeCallback);
-}
-
 static JNIEnv* attach()
 {
     JNIEnv* threadEnv = nullptr;
@@ -51,12 +40,24 @@ static JNIEnv* attach()
     }
     return threadEnv;
 }
+// Async callbacks
+static void asyncRequest(JNIEnv *env)
+{
+    DEMO_LOG("asyncRequest env = %p", (void *)env);
+
+    jclass clazz = static_cast<jclass >(g_class);
+
+    // Get the method that you want to call
+    jmethodID nativeCallback = env->GetStaticMethodID(clazz, "nativeCallback", "()V");
+    env->CallStaticVoidMethod(clazz, nativeCallback);
+}
 
 static void asyncRequestCorrect(JNIEnv *env)
 {
     DEMO_LOG("asyncRequestCorrect env = %p", (void *)env);
 
     JNIEnv* threadEnv = attach();
+
     asyncRequest(threadEnv);
 
     s_jvm->DetachCurrentThread();
@@ -67,7 +68,6 @@ void nativeThreadNegative(JNIEnv *env, jclass thiz)
     DEMO_LOG("nativeThreadNegative IN\n");
 
     g_class = env->NewGlobalRef(thiz);
-
 
     std::thread nativeThread(asyncRequest, env);
     nativeThread.join();

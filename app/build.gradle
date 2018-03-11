@@ -10,8 +10,6 @@ android {
         versionName "1.0"
         externalNativeBuild {
             cmake {
-                //cppFlags "-std=c++11 -fexceptions"
-                //cppFlags "-std=c++11 -fno-exceptions"
                 cppFlags "-std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden"
             }
         }
@@ -33,3 +31,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
+
+
+//android {
+//  defaultConfig {
+//    externalNativeBuild {
+//      cmake {
+//        cppFlags "-std=c++11 " +
+//                 "-frtti -fexceptions " +
+//                 "-ffunction-sections " +
+//                 "-fdata-sections " +
+//                 "-fvisibility=hidden"
+//      }
+//    }
+//  }
+//}

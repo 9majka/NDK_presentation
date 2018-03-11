@@ -12,6 +12,21 @@ cmake_minimum_required(VERSION 3.4.1)
 
 include_directories(src/main/cpp/)
 
+## C++ flags
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -fexceptions")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+#
+## C flags
+#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -fvisibility=hidden")
+#
+## Debug/release
+#SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} .... ")
+#SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ....")
+#SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} .... ")
+## Linker flags
+#
+
 add_library( # Sets the name of the library.
              ndkdemo
 
@@ -34,7 +49,7 @@ add_library( # Sets the name of the library.
 
 
 #IMPORTANT C++ compiler flags
-#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fexceptions -ffunction-sections -fdata-sections -fvisibility=hidden")
 
 find_library( log-lib log )
 

@@ -23,8 +23,13 @@ void pendingExceptionPositive(JNIEnv *env, jclass clazz)
     env->CallStaticVoidMethod(clazz, nativeCallbackWithException);
     if(env->ExceptionCheck())
     {
-        DEMO_LOG("Exception is pending. Ignore it\n");
+        jthrowable exception = env->ExceptionOccurred();
+
+        //Clear exception and only then parse it
         env->ExceptionClear();
+
+        jclass throwable_class = env->FindClass("java/lang/Throwable");
+        // Parse exception ......
     }
 }
 
