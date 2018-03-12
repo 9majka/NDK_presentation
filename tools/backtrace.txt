@@ -1,0 +1,28 @@
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+Build fingerprint: 'samsung/heroltexx/herolte:7.0/NRD90M/G930FXXS1DRA5:user/release-keys'
+Revision: '8'
+ABI: 'arm64'
+pid: 18630, tid: 18630, name: .ndkexampledemo  >>> com.softserveinc.ndkexampledemo <<<
+signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+    x0   0000000000000000  x1   00000000000048c6  x2   0000000000000006  x3   0000000000000008
+    x4   0000000000000002  x5   4000000000000000  x6   0000007fc8bad5f0  x7   fefefefefefefefe
+    x8   0000000000000083  x9   ffffffffffffffdf  x10  0000000000000000  x11  ffffffffffffffff
+    x12  0000000000000028  x13  ffffffffffffffff  x14  0000000000000000  x15  ffffffffffffffff
+    x16  0000007f0dc58ee0  x17  0000007f0dc01a28  x18  0000000000000017  x19  0000007f0fd24b40
+    x20  0000000000000006  x21  0000007f0fd24a98  x22  000000000000000b  x23  0000007f0a1cdefb
+    x24  0000000000000000  x25  8d827c4344fc867e  x26  0000007f0b4c7a98  x27  8d827c4344fc867e
+    x28  0000000000000000  x29  0000007fc8baec00  x30  0000007f0dbfeebc
+    sp   0000007fc8baebe0  pc   0000007f0dc01a30  pstate 0000000060000000
+backtrace:
+    #00 pc 000000000006ca30  /system/lib64/libc.so (tgkill+8)
+    #01 pc 0000000000069eb8  /system/lib64/libc.so (pthread_kill+64)
+    #02 pc 0000000000024198  /system/lib64/libc.so (raise+24)
+    #03 pc 000000000001c9b0  /system/lib64/libc.so (abort+52)
+    #04 pc 0000000000015f54  /data/app/com.softserveinc.ndkexampledemo-1/lib/arm64/libndkdemo.so (_ZN9__gnu_cxx27__verbose_terminate_handlerEv+396)
+    #05 pc 000000000000da8c  /data/app/com.softserveinc.ndkexampledemo-1/lib/arm64/libndkdemo.so (_ZN10__cxxabiv111__terminateEPFvvE+8)
+    #06 pc 000000000000daf8  /data/app/com.softserveinc.ndkexampledemo-1/lib/arm64/libndkdemo.so (_ZSt9terminatev+12)
+    #07 pc 000000000000dc34  /data/app/com.softserveinc.ndkexampledemo-1/lib/arm64/libndkdemo.so (__cxa_throw+136)
+    #08 pc 000000000000c480  /data/app/com.softserveinc.ndkexampledemo-1/lib/arm64/libndkdemo.so
+    #09 pc 000000000000c360  /data/app/com.softserveinc.ndkexampledemo-1/lib/arm64/libndkdemo.so
+    #10 pc 000000000000b46c  /data/app/com.softserveinc.ndkexampledemo-1/lib/arm64/libndkdemo.so
+    #11 pc 0000000000049e4c  /data/app/com.softserveinc.ndkexampledemo-1/oat/arm64/base.odex (offset 0x47000)

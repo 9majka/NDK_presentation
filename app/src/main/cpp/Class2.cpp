@@ -15,7 +15,12 @@ void Class2::demoMethodImpl()
     volatile bool check = true;
     if(check)
     {
-        DEMO_LOG("Class2::demoMethodImpl %d\n", *ptr);
+        DEMO_LOG("Class2::demoMethodImpl if error %d\n", *ptr);
+        throw new std::runtime_error("Shouldn't be called");
+    } else
+    {
+        DEMO_LOG("Class2::demoMethodImpl else error %d\n", *ptr);
+        throw new std::runtime_error("Shouldn't be called");
     }
 
     DEMO_LOG("Class2::demoMethodImpl OUT\n");
