@@ -1,7 +1,5 @@
 #include <jni.h>
 
-
-
 #include "ReferenceTable.h"
 #include "NativeThread.h"
 #include "Exception.h"

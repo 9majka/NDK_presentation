@@ -32,7 +32,7 @@ void localTableReferenceOverflowPositive(JNIEnv *env)
 
         // Call some method on the Java side
 
-        // Release immediatly
+        // Release immediately
         env->DeleteLocalRef(testString);
         env->DeleteLocalRef(arrayB);
         env->DeleteLocalRef(arrayC);
@@ -48,8 +48,10 @@ void globalTableReferenceOverflowNegative(JNIEnv *env)
     for(int i = 0; i< 100000; i++)
     {
         jstring testString = env->NewStringUTF("Test String");
+
         jobject globalObject = env->NewGlobalRef(testString);
         globalArray.push_back(globalObject);
+
         env->DeleteLocalRef(testString);
     }
 

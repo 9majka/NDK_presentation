@@ -26,9 +26,7 @@ public class JNIBridge {
         } catch (Exception ex) {
             Log.i("JNIBridge", "Java: Exception is caught: " + ex);
         }
-
     }
-
 
     public static native void localTableReferenceOverflowPositive();
     public static native void localTableReferenceOverflowNegative();
