@@ -63,13 +63,14 @@ static void on_signal (int sig, siginfo_t *siginfo, void *context)
 
 static void registerSignalHandler()
 {
-    struct sigaction act;
+    struct sigaction newHandler;
+    struct sigaction oldHandler;
 
-    memset (&act, '\0', sizeof(act));
+    memset (&newHandler, '\0', sizeof(newHandler));
 
-    act.sa_sigaction = &on_signal;
-    act.sa_flags = SA_SIGINFO;
-    sigaction(SIGSEGV, &act, NULL);
+    newHandler.sa_sigaction = &on_signal;
+    newHandler.sa_flags = SA_SIGINFO;
+    sigaction(SIGSEGV, &newHandler, NULL);
 }
 
 void crashHandler(JNIEnv *env, jclass thiz)
